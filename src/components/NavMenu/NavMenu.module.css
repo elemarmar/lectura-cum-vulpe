@@ -1,0 +1,24 @@
+.NavMenu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+}
+
+
+.NavMenu li {
+    margin: 0 20px;
+    border: solid 1px purple
+}
+
+
+.MenuLink {
+    text-decoration: none;
+    display: inline-block;
+    border: solid 1px orange;
+    padding: 14px 10px;
+}
+
+.active {
+    background-color: orange;
+}

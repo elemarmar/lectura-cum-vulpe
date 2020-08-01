@@ -1,0 +1,10 @@
+.Word {
+    background-color: rgb(4, 124, 84);
+    color: white;
+    margin: 5px;
+}
+
+.Word:hover {
+    background-color: red;
+    cursor: pointer;
+}
