@@ -2,9 +2,16 @@
     background-color: rgb(4, 124, 84);
     color: white;
     margin: 5px;
+    border: solid 1px salmon;
 }
 
 .Word:hover {
     background-color: red;
     cursor: pointer;
+}
+
+.WordTranslated {
+    border: solid 1px blue;
+    display: flex;
+    flex-direction: column;
 }
