@@ -1,0 +1,11 @@
+.Instructions {
+    display: block;
+    margin: 20px auto;
+}
+
+.CopiedTextArea {
+    min-width: 200px;
+    max-width: 400px;
+    display: block;
+    margin: 0 auto 20px;
+}
