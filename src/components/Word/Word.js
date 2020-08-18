@@ -4,13 +4,25 @@ import './Word.css'
 
 const StudyText = (props) => {
 
-    return (
+    let content = (            
         <span 
             className="Word"    
             data-p={props.id}
-            onClick={props.clicked}>{props.word}</span>
+            onClick={props.clicked}>{props.word}</span>);
 
-    );
+    if (props.translation) {
+        content = (
+            <div className="WordTranslated">
+                <span>{props.translation}</span>
+                <span 
+                    className="Word"    
+                    data-p={props.id}
+                    onClick={props.clicked}>{props.word}</span>
+            </div>
+        )
+    }
+
+    return (content);
 }
 
 export default StudyText;

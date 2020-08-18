@@ -1,5 +1,5 @@
 import React from 'react';
-import Word from '../Word/Word';
+import WordsText from '../WordsText/WordsText';
 import axios from 'axios';
 import './StudyText.css';
 
@@ -8,11 +8,7 @@ class StudyText extends React.Component {
     super(props);
     this.state = {
       data: ['This', 'is', 'an', 'important', 'sentence'],
-      translates: {
-        this: 'esto',
-        word: 'palabra',
-      },
-      word: '',
+      translations: {},
     };
     this.onClickHandle = this.onClickHandle.bind(this);
   }
@@ -29,34 +25,49 @@ class StudyText extends React.Component {
   onClickHandle = (ev) => {
     const target = ev.target;
     const word = target.innerHTML;
-    this.getTranslationsApi(word);
+    if (!this.state.translations[word]) {
+      this.getTranslationsApi(word);
+    } else {
+      const updatedTranslations = this.state.translations;
+      updatedTranslations[word] = '';
+      this.setState({
+        translations: updatedTranslations
+      })
+      // this.setState({
+      //   translations: {
+      //     [word]: ''
+      //   }
+      // })
+    }
+
   };
 
   getTranslationsApi = (word) => {
-    // lastClickedWord= word
+    let lastClickedWord = word;
     axios
-      .get(`https://api.mymemory.translated.net/get?q=${word}&langpair=en|es`)
+      .get(`https://api.mymemory.translated.net/get?q=${word}&langpair=de|en`)
       .then((response) => {
         console.log(response.data.responseData.translatedText);
-        // meter en el estado
-        //     if (lastClickedWord === word) {
-
-        //         console.log(word, esponse.data.responseData.translatedText)
-        //     }
+            if (lastClickedWord === word) {
+              const updatedTranslations = this.state.translations;
+              updatedTranslations[word] = response.data.responseData.translatedText;
+              this.setState({
+                translations: updatedTranslations
+              })
+            }
       });
   };
 
   render() {
-    return this.state.data.map((word) => {
-      return (
-        <Word
-          id={this.state.data.indexOf(word)}
-          key={this.state.data.indexOf(word)}
-          clicked={this.onClickHandle}
-          word={word}
-        />
-      );
-    });
+    return (
+      <div className="content">
+            <WordsText 
+                data={this.state.data}
+                translations={this.state.translations}
+                onClickHandle={this.onClickHandle}/>
+      </div>
+    );
+
   }
 }
 

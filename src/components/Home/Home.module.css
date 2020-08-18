@@ -1,0 +1,32 @@
+.UploadBtn {
+    background-color: aquamarine;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-image: url(../../assets/images/uploadbtn.png);
+    background-size: cover;
+    background-position: center center;
+}
+
+.UploadBtn:hover {
+    background-color: rgb(107, 179, 182);
+    cursor: pointer;
+}
+
+
+.CopyBtn {
+    background-color: aquamarine;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-image: url(../../assets/images/TextBtn.png);
+    background-size: cover;
+    background-position: center center;
+}
+
+.CopyBtn:hover {
+    background-color: rgb(107, 179, 182);
+    cursor: pointer;
+}

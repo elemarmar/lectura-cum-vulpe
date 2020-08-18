@@ -43,6 +43,7 @@ app.post('/upload', function (req, res) {
   });
 
   readFile();
+  console.log(req.body.copiedText);
 });
 
 /*app.get('/get-file', function (req, res) {
@@ -57,13 +58,10 @@ app.listen(8000, function () {
 });
 
 let newTextData = [];
-// Read uploaded document
 const readFile = () => {
   fs.readFile(filePath, { encoding: 'utf-8' }, (err, data) => {
     if (err) throw err;
-    console.log(data);
     newTextData = parseSrt(data);
-    console.log('Data: ' + newTextData);
     writeFile();
   });
 };
@@ -73,7 +71,6 @@ function parseSrt(text) {
 }
 
 const writeFile = () => {
-  // create file
   fs.writeFile('public/data.json', JSON.stringify(newTextData), function (err) {
     if (err) throw err;
     console.log('File is created successfully.');
