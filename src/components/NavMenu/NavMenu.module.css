@@ -1,24 +1,25 @@
 .NavMenu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
 }
-
 
 .NavMenu li {
-    margin: 0 20px;
-    border: solid 1px purple
+  margin: 0 20px;
+  font-size: 18px;
 }
 
+.NavMenu a {
+  color: rgb(78, 138, 78);
+}
 
 .MenuLink {
-    text-decoration: none;
-    display: inline-block;
-    border: solid 1px orange;
-    padding: 14px 10px;
+  text-decoration: none;
+  display: inline-block;
+  padding: 14px 10px;
 }
 
-.active {
-    background-color: orange;
+a.active {
+  color: orange;
 }

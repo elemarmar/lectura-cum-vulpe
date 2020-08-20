@@ -16,6 +16,8 @@ class App extends React.Component {
     this.state = {
       selectedFile: null,
       isUpload: true,
+      targetLang: '',
+      nativeLang: '',
       copiedText: '',
     };
 
@@ -24,6 +26,7 @@ class App extends React.Component {
     this.onClickHandler = this.onClickHandler.bind(this);
     this.changeTextMethodToUpload = this.changeTextMethodToUpload.bind(this);
     this.changeTextMethodToCopy = this.changeTextMethodToCopy.bind(this);
+    this.selectTargetLang = this.selectTargetLang.bind(this);
   }
 
   onChangeHandler(event) {
@@ -35,7 +38,6 @@ class App extends React.Component {
   }
 
   onTextChangeHandler(event) {
-    console.log(event.target.value);
     this.setState({
       copiedText: event.target.value,
     });
@@ -62,6 +64,12 @@ class App extends React.Component {
         this.forceUpdate();
       });
     }
+  };
+
+  selectTargetLang = (lang) => {
+    this.setState({
+      targetLang: lang,
+    });
   };
 
   changeTextMethodToCopy = () => {
@@ -92,12 +100,18 @@ class App extends React.Component {
                 textValue={this.state.copiedText}
                 uploadMethodClick={this.changeTextMethodToUpload}
                 copyMethodClick={this.changeTextMethodToCopy}
+                selectTargetLang={this.selectTargetLang}
               />
             )}
           />
           <Route
             path='/study'
-            render={(props) => <StudyText text={this.state.textArray} />}
+            render={(props) => (
+              <StudyText
+                text={this.state.textArray}
+                targetLang={this.state.targetLang}
+              />
+            )}
           />
         </Switch>
       </div>
