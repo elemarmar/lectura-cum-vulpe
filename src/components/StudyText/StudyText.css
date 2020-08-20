@@ -1,8 +1,11 @@
 .content {
-  border: solid 1px red;
-  width: 800px;
+  width: 700px;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  padding: 50px;
 }

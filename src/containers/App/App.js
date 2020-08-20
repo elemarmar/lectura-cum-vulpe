@@ -6,9 +6,9 @@ import Home from '../../components/Home/Home';
 import StudyText from '../../components/StudyText/StudyText';
 import NavMenu from '../../components/NavMenu/NavMenu';
 
+import logo from '../../assets/images/logo.jpg';
 
 import './App.css';
-
 
 class App extends React.Component {
   constructor(props) {
@@ -16,8 +16,8 @@ class App extends React.Component {
     this.state = {
       selectedFile: null,
       isUpload: true,
-      copiedText: ''
-    }
+      copiedText: '',
+    };
 
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onTextChangeHandler = this.onTextChangeHandler.bind(this);
@@ -31,14 +31,14 @@ class App extends React.Component {
     this.setState({
       selectedFile: event.target.files[0],
       loaded: 0,
-    })
+    });
   }
 
   onTextChangeHandler(event) {
     console.log(event.target.value);
     this.setState({
-      copiedText: event.target.value
-    })
+      copiedText: event.target.value,
+    });
   }
 
   onClickHandler = () => {
@@ -46,66 +46,63 @@ class App extends React.Component {
 
     if (this.state.isUpload) {
       data.append('file', this.state.selectedFile);
-      axios.post("http://localhost:8000/upload", data, { 
-        // receive two parameter endpoint url ,form data 
-      })
-      .then(res => { // then print response status
-        console.log(res.statusText)
-        this.forceUpdate();
-      })
+      axios
+        .post('http://localhost:8000/upload', data, {
+          // receive two parameter endpoint url ,form data
+        })
+        .then((res) => {
+          // then print response status
+          console.log(res.statusText);
+          this.forceUpdate();
+        });
     } else {
       data.append('copiedtext', this.state.copiedText);
-      axios.post("http://localhost:8000/upload", data, {
-
-      })
-      .then(res => {
-        console.log(res.statusText)
+      axios.post('http://localhost:8000/upload', data, {}).then((res) => {
+        console.log(res.statusText);
         this.forceUpdate();
-      })
+      });
     }
+  };
 
-}
+  changeTextMethodToCopy = () => {
+    this.setState({ isUpload: false });
+  };
 
-
-
-changeTextMethodToCopy = () =>{
-this.setState({isUpload: false})
-}
-
-changeTextMethodToUpload = () => {
-this.setState({isUpload: true})
-}
-
+  changeTextMethodToUpload = () => {
+    this.setState({ isUpload: true });
+  };
 
   render() {
-
     return (
-      <div className="App">
-        <h1>Lang-reader</h1>
+      <div className='App'>
+        <h1>
+          <img className='App-logo' src={logo} />
+        </h1>
         <NavMenu />
         <Switch>
-          <Route 
-            exact 
-            path='/' 
+          <Route
+            exact
+            path='/'
             render={(props) => (
-              <Home 
+              <Home
                 onChangeHandler={this.onChangeHandler}
                 onTextChangeHandler={this.onTextChangeHandler}
                 onClickHandler={this.onClickHandler}
-                isUpload={this.state.isUpload} 
+                isUpload={this.state.isUpload}
                 textValue={this.state.copiedText}
                 uploadMethodClick={this.changeTextMethodToUpload}
-                copyMethodClick={this.changeTextMethodToCopy}/>)}/>
-          <Route 
-            path='/study' 
-            render={(props) => (
-              <StudyText text={this.state.textArray} />)} />
+                copyMethodClick={this.changeTextMethodToCopy}
+              />
+            )}
+          />
+          <Route
+            path='/study'
+            render={(props) => <StudyText text={this.state.textArray} />}
+          />
         </Switch>
-  
       </div>
     );
   }
-
 }
 
 export default App;
